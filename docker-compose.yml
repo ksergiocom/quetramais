@@ -1,0 +1,17 @@
+services:
+  server:
+    build: ./server
+    image: honey-server-express
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    restart: always
+  mysql:
+    build: ./mysql
+    image: honey-server-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'a_secret_password'
+    restart: always
+    ports:
+      - "3306:3306"

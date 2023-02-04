@@ -1,0 +1,41 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title LogServer
+        link(rel="shortcut icon", href="data:,",)
+        script(src="https://cdn.tailwindcss.com") 
+        script(src="/socket.io/socket.io.js") 
+    body(class='max-w-md mx-auto text-gray-900 flex flex-col gap-5 justify-center p-5 bg-gray-100')
+        div(class="flex flex-col gap-4 justify-center items-center text-center py-5") 
+            span(class="h-5 w-5 flex")
+                span(class="absolute h-5 w-5 rounded-full bg-red-500")
+                span(class="absolute h-5 w-5 rounded-full animate-ping bg-red-500 opacity-75")
+            h1(class="text-5xl font-bold") ¿Qué tramais?
+        p(class="text-center") Hola! Veamos las peticiones más fercuentemente realizadas a este servidor 🔍
+        p(class="text-center") <span class="font-semibold">Se actualiza en tiempo real!</span> Desde que has llegado a la página se a actualizado un total de <span class="text-red-500 font-bold" id="cantidadActualizaciones">0</span> veces.
+        p(class="text-center") La ultima vez <span class="text-red-500" id="ultimaActualizacion">S/N</span>
+        table#tabla(class='text-left my-5') 
+            thead(class="bg-red-500 text-white") 
+                th Uds
+                th URL
+                th Método
+            tbody#tbody 
+                each request in requests
+                    tr(class="border-b") 
+                        td= request.count
+                        td= request.url 
+                        td= request.method 
+
+        
+        h2(class="mt-7 text-3xl") 🤔 Pero, ¿Por qué?
+        p Bien, esta página es un pequeño proyecto para aprender a usar la herramienta 🐳 <a class="text-red-500 font-semibold" href="https://www.docker.com/">Docker</a> y <a class="text-red-500 font-semibold" href="https://docs.docker.com/compose/">Docker Compose</a>. Para hacerlo más ameno decidí crear un servidor usando sockets para mostrar el registro de las peticiones más frecuentes.
+        p Seamos realistas , ¿quien visita una página desconocida? Esta página a parte de estar asociada a un subdominio, también es accesible directamente desde una IP plana. La mayor parte de peticiones son robots 🤖 que rastrean 🐾 automaticamente posibles vulnerabilidades.
+        p(class="mb-10") ¿Por que no monitorizarles y ver cuales son las peticiones más frecuentes? ¡Veamos que pasa! 🕵️‍♀️
+
+        p Si quieres ver el código o como está hecho este proyecto lo puedes seguir en su repositorio de github. Para más proyectos de este tipo puedes visitar mi página web personal <a class="text-center text-red-500 font-semibold" href="https://www.ksergio.com">www.ksergio.com</a>
+        
+
+        script(src="/public/script.js") 
